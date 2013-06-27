@@ -23,3 +23,9 @@ Explore GitHub contributions
 ### Step 3
 - Type GitHub username.
 - Upload CSV file.
+
+## License
+
+The MIT License
+
+Copyright (c) 2013 Jan Antala, https://github.com/janantala
