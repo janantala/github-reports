@@ -62,8 +62,18 @@ var filter = function(data, classes){
 
 var classify = function(data, classes){
 
+  var yearArr = initArray(12, classes); // histogram
+  var weekArr = initArray(7, classes); // histogram
+  var dayArr = initArray(24, classes); // histogram
+  var weekhoursArr = [initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes)]; // punchcard
+
+  console.log(yearArr);
+  console.log(weekArr);
+  console.log(dayArr);
+  console.log(weekhoursArr);
+
   data.forEach(function(contribution){
-    console.log(contribution['created_at']);
+    console.log(contribution['created_at'], contribution['type']);
 
     var arr = contribution['created_at'].split(' ');
     var year = arr[0].split('-')[0];
@@ -72,10 +82,37 @@ var classify = function(data, classes){
     var hour = arr[1].split(':')[0];
 
     var date = new time.Date(year, month, day, hour, 'UTC');
-    console.log(date.toString());
+    // console.log(date.toString());
     date.setTimezone('Europe/Bratislava');
-    console.log(date.toString());
+    // console.log(date.toString());
+    // console.log(date.getMonth(), date.getDay(), date.getHours());
+    // console.log(date);
+
+    yearArr[date.getMonth()][contribution['type']] += 1;
+    weekArr[date.getDay()][contribution['type']] += 1;
+    dayArr[date.getHours()][contribution['type']] += 1;
+
+    console.log(yearArr[date.getMonth()]);
+    console.log(weekArr[date.getDay()]);
+    console.log(dayArr[date.getHours()]);
   });
+
+  console.log(yearArr);
+  console.log(weekArr);
+  console.log(dayArr);
   return data;
 };
 
+var initArray = function(arraySize, classes){
+  var array = [];
+  while(arraySize--) {
+    var obj = {};
+    classes.forEach(function(c){ obj[c] = 0; });
+    array.push(obj);
+  }
+  return array;
+};
+
+var clone = function(obj){
+  return JSON.parse(JSON.stringify(obj));
+};
