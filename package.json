@@ -1,0 +1,16 @@
+{
+  "name": "github-profile",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node github-profile.js"
+  },
+  "dependencies": {
+    "express": "3.2.6",
+    "ejs": "*",
+    "csv": "*",
+    "q": "*",
+    "time": "*",
+    "cron": "*",
+    "jsdom": "*"
+  }
+}
