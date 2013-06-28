@@ -68,13 +68,8 @@ var classify = function(data, classes, timezone){
   var dayArr = initArray(24, classes); // histogram
   var weekhoursArr = [initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes)]; // punchcard
 
-  console.log(yearArr);
-  console.log(weekArr);
-  console.log(dayArr);
-  console.log(weekhoursArr);
-
   data.forEach(function(contribution){
-    console.log(contribution['created_at'], contribution['type']);
+    // console.log(contribution['created_at'], contribution['type']);
 
     var arr = contribution['created_at'].split(' ');
     var year = arr[0].split('-')[0];
@@ -88,16 +83,15 @@ var classify = function(data, classes, timezone){
     yearArr[date.getMonth()][contribution['type']] += 1;
     weekArr[date.getDay()][contribution['type']] += 1;
     dayArr[date.getHours()][contribution['type']] += 1;
-
-    console.log(yearArr[date.getMonth()]);
-    console.log(weekArr[date.getDay()]);
-    console.log(dayArr[date.getHours()]);
+    weekhoursArr[date.getDay()][date.getHours()][contribution['type']] += 1;
   });
 
-  console.log(yearArr);
-  console.log(weekArr);
-  console.log(dayArr);
-  return data;
+  return {
+    'yearArr': yearArr,
+    'weekArr': weekArr,
+    'dayArr': dayArr,
+    'weekhoursArr': weekhoursArr
+  };
 };
 
 var initArray = function(arraySize, classes){
