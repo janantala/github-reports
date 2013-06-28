@@ -12,6 +12,7 @@ exports.analyze = function(req, res){
 
   var file = 'results-20130628-004520.csv';
   var classes = ['PushEvent', 'PullRequestEvent', 'IssuesEvent'];
+  var timezone = 'Europe/Bratislava';
 
   Q.fcall(function(){
     var deferred = Q.defer();
@@ -28,7 +29,7 @@ exports.analyze = function(req, res){
     return filter(data, classes);
   })
   .then(function(data){
-    return classify(data, classes);
+    return classify(data, classes, timezone);
   })
   .then(function(data){
     res.send(data);
@@ -60,7 +61,7 @@ var filter = function(data, classes){
   return filtered;
 };
 
-var classify = function(data, classes){
+var classify = function(data, classes, timezone){
 
   var yearArr = initArray(12, classes); // histogram
   var weekArr = initArray(7, classes); // histogram
@@ -82,11 +83,7 @@ var classify = function(data, classes){
     var hour = arr[1].split(':')[0];
 
     var date = new time.Date(year, month, day, hour, 'UTC');
-    // console.log(date.toString());
-    date.setTimezone('Europe/Bratislava');
-    // console.log(date.toString());
-    // console.log(date.getMonth(), date.getDay(), date.getHours());
-    // console.log(date);
+    date.setTimezone(timezone);
 
     yearArr[date.getMonth()][contribution['type']] += 1;
     weekArr[date.getDay()][contribution['type']] += 1;
@@ -113,6 +110,3 @@ var initArray = function(arraySize, classes){
   return array;
 };
 
-var clone = function(obj){
-  return JSON.parse(JSON.stringify(obj));
-};
