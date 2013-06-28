@@ -36,7 +36,7 @@ var analytics = require('./routes/analytics');
 
 app.get('/', routes.index);
 
-app.get('/analytics/:user/:csv', analytics.analyze);
+app.get('/analytics/:user', analytics.analyze);
 app.post('/upload', uploads.csv);
 
 http.createServer(app).listen(app.get('port'), function(){
