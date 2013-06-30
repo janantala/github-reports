@@ -1,3 +1,63 @@
 <h2>Analytics {{routeParams.profile}}</h2>
 
-<p>{{analytics | json}}</p>
+<section class="year">
+  <h4>Year</h4>
+  <ul>
+    <li ng-repeat="month in analytics.yearArr">
+      {{$index}}: {{getTotal(analytics.yearArr[$index], events)}}
+      <ul>
+        <li ng-repeat="event in events">
+          {{event}}: {{analytics.yearArr[$parent.$index][event]}}
+        </li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<section class="week">
+<h4>Week</h4>
+  <ul>
+    <li ng-repeat="day in analytics.weekArr">
+      {{$index}}: {{getTotal(analytics.weekArr[$index], events)}}
+      <ul>
+        <li ng-repeat="event in events">
+          {{event}}: {{analytics.weekArr[$parent.$index][event]}}
+        </li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<section class="day">
+  <h4>Day</h4>
+  <ul>
+    <li ng-repeat="hour in analytics.dayArr">
+      {{$index}}: {{getTotal(analytics.dayArr[$index], events)}}
+      <ul>
+        <li ng-repeat="event in events">
+          {{event}}: {{analytics.dayArr[$parent.$index][event]}}
+        </li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+
+<section class="weekhours">
+  <h4>WeekDays</h4>
+  <ul>
+    <li ng-repeat="day in analytics.weekhoursArr">
+      {{$index}}
+      <ul>
+        <li ng-repeat="hour in day">
+          {{$index}}: {{getTotal(hour, events)}}
+          <ul>
+            <li ng-repeat="event in events">
+              {{event}}: {{day[$parent.$index][event]}}
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</section>
