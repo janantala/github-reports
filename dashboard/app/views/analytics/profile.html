@@ -30,21 +30,31 @@
 
 <section class="day">
   <h4>Day</h4>
-  <ul>
-    <li ng-repeat="hour in analytics.dayArr">
-      {{$index}}: {{getTotal(analytics.dayArr[$index], events)}}
-      <ul>
-        <li ng-repeat="event in events">
-          {{event}}: {{analytics.dayArr[$parent.$index][event]}}
-        </li>
-      </ul>
-    </li>
-  </ul>
+  <div class="flex-container">
+    <div class="flex-row title">
+      <strong>Hour</strong>
+    </div>
+    <div class="flex-row" ng-repeat="hour in hours">
+      <strong>{{hour}}</strong>
+    </div>
+  </div>
+  <div class="flex-container">
+    <div class="flex-row title">
+      <strong>Contributions</strong>
+    </div>
+    <div class="flex-row"
+      ng-repeat="hour in analytics.dayArr"
+      ng-class="getContributionClass(getTotal(hour, events), maxDay)"
+      tooltip-html-unsafe="{{getTooltip(hour, events)}}"
+    >
+      {{getTotal(hour, events)}}
+    </div>
+  </div>
 </section>
 
 
-<section class="">
-  <caption>weekhours</caption>
+<section class="weekhours">
+  <h4>WeekHours</h4>
   <div class="flex-container">
     <div class="flex-row title">
       <strong>Day</strong>
@@ -55,7 +65,9 @@
   </div>
 
   <div ng-repeat="day in analytics.weekhoursArr" class="flex-container">
-    <div class="flex-row title">{{strings.DAY[$index]}}</div>
+    <div class="flex-row title">
+      <strong>{{strings.DAY[$index]}}</strong>
+    </div>
     <div class="flex-row"
       ng-repeat="hour in day"
       ng-class="getContributionClass(getTotal(hour, events), maxWeekHours)"

@@ -7,6 +7,9 @@ angular.module('dashboardApp')
 
   $scope.events = ['PushEvent', 'PullRequestEvent', 'IssuesEvent'];
   $scope.dayHours = [];
+  $scope.hours = [];
+  $scope.days = [];
+  $scope.months = [];
   $scope.strings = {
     "DAY": {
       "0": "Sunday",
@@ -56,8 +59,20 @@ angular.module('dashboardApp')
     }
   };
 
+  for (var dh=0; dh<24;dh++){
+    $scope.dayHours.push(dh);
+  }
+
   for (var h=0; h<24;h++){
-    $scope.dayHours.push(h);
+    $scope.hours.push(h);
+  }
+
+  for (var d=0; d<7;d++){
+    $scope.days.push(d);
+  }
+
+  for (var m=0; m<12;m++){
+    $scope.months.push(m);
   }
 
   $scope.getTotal = function(item, events){
