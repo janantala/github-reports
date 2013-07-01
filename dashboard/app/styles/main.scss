@@ -6,8 +6,16 @@
   box-sizing: border-box;
 }
 
+table{
+    border: 1px solid black;
+    table-layout: fixed;
+    width: 500px;
+}
+
 th, td {
   border: 5px solid white;
+  overflow: hidden;
+  width: 20px;
 }
 .contributions-none {
   background-color: rgb(240,240,240);
