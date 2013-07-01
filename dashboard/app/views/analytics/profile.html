@@ -7,7 +7,7 @@
       <strong>Month</strong>
     </div>
     <div class="flex-row" ng-repeat="month in months">
-      <strong>{{month}}</strong>
+      <strong>{{strings.SHORTMONTH[$index]}}</strong>
     </div>
   </div>
   <div class="flex-container">
@@ -31,7 +31,7 @@
       <strong>Day</strong>
     </div>
     <div class="flex-row" ng-repeat="day in days">
-      <strong>{{day}}</strong>
+      <strong>{{strings.SHORTDAY[$index]}}</strong>
     </div>
   </div>
   <div class="flex-container">
