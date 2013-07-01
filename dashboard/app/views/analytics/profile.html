@@ -43,29 +43,10 @@
 </section>
 
 
-<!-- <section class="weekhours">
-  <h4>WeekDays {{max}}</h4>
-  <ul>
-    <li ng-repeat="day in analytics.weekhoursArr">
-      {{$index}}
-      <ul>
-        <li ng-repeat="hour in day">
-          {{$index}}: {{getTotal(hour, events)}} = {{getTotal(hour, events) / max}}
-          <ul>
-            <li ng-repeat="event in events">
-              {{event}}: {{day[$parent.$index][event]}}
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</section> -->
-
 <section class="">
   <caption>weekhours</caption>
   <div class="flex-container">
-    <div class="flex-row">
+    <div class="flex-row title">
       <strong>Day</strong>
     </div>
     <div class="flex-row" ng-repeat="hour in dayHours">
@@ -74,7 +55,7 @@
   </div>
 
   <div ng-repeat="day in analytics.weekhoursArr" class="flex-container">
-    <div class="flex-row">{{$index}}</div>
+    <div class="flex-row title">{{strings.DAY[$index]}}</div>
     <div class="flex-row"
       ng-repeat="hour in day"
       ng-class="getContributionClass(getTotal(hour, events))"
