@@ -2,16 +2,26 @@
 
 <section class="year">
   <h4>Year</h4>
-  <ul>
-    <li ng-repeat="month in analytics.yearArr">
-      {{$index}}: {{getTotal(analytics.yearArr[$index], events)}}
-      <ul>
-        <li ng-repeat="event in events">
-          {{event}}: {{analytics.yearArr[$parent.$index][event]}}
-        </li>
-      </ul>
-    </li>
-  </ul>
+  <div class="flex-container">
+    <div class="flex-row title">
+      <strong>Month</strong>
+    </div>
+    <div class="flex-row" ng-repeat="month in months">
+      <strong>{{month}}</strong>
+    </div>
+  </div>
+  <div class="flex-container">
+    <div class="flex-row title">
+      <strong>Contributions</strong>
+    </div>
+    <div class="flex-row"
+      ng-repeat="month in analytics.yearArr"
+      ng-class="getContributionClass(getTotal(month, events), maxYear)"
+      tooltip-html-unsafe="{{getTooltip(month, events)}}"
+    >
+      {{getTotal(month, events)}}
+    </div>
+  </div>
 </section>
 
 <section class="week">
