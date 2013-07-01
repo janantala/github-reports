@@ -51,4 +51,12 @@ angular.module('dashboardApp')
       return 'contributions-most';
     }
   };
+
+  $scope.getTooltip = function(hour, events){
+    var html = '';
+    events.forEach(function(event){
+      html += event + ': ' + hour[event] + '<br />';
+    });
+    return html;
+  };
 }]);

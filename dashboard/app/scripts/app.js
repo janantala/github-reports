@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dashboardApp', ['ngResource'])
+angular.module('dashboardApp', ['ngResource', 'ui.bootstrap.position', 'ui.bootstrap.tooltip'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

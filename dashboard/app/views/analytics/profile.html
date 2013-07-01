@@ -75,7 +75,11 @@
   <tbody>
     <tr ng-repeat="day in analytics.weekhoursArr">
       <td>{{$index}}</td>
-      <td ng-repeat="hour in day" ng-class="getContributionClass(getTotal(hour, events))">
+      <td
+        ng-repeat="hour in day"
+        ng-class="getContributionClass(getTotal(hour, events))"
+        tooltip-html-unsafe="{{getTooltip(hour, events)}}"
+      >
         {{getTotal(hour, events)}}
         <!-- {{getTotal(hour, events) / max}} -->
       </td>
