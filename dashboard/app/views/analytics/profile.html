@@ -1,5 +1,17 @@
 <h2>Analytics {{routeParams.profile}}</h2>
 
+<div class="btn-group">
+    <button type="button" class="btn btn-success" ng-model="checkEvent.push" btn-checkbox ng-change="changeEvents()">
+      PushEvent
+    </button>
+    <button type="button" class="btn btn-success" ng-model="checkEvent.pullrequest" btn-checkbox ng-change="changeEvents()">
+      PullRequestEvent
+    </button>
+    <button type="button" class="btn btn-success" ng-model="checkEvent.issues" btn-checkbox ng-change="changeEvents()">
+      IssuesEvent
+    </button>
+</div>
+
 <section class="year">
   <h4>Year</h4>
   <div class="flex-container">
