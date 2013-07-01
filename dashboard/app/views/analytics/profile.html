@@ -64,25 +64,24 @@
 
 <section class="">
   <caption>weekhours</caption>
-  <div>
-    <div>
-      <span>Day</span>
-      <span ng-repeat="hour in dayHours">
-        {{hour}}
-      </span>
+  <div class="flex-container">
+    <div class="flex-row">
+      <strong>Day</strong>
+    </div>
+    <div class="flex-row" ng-repeat="hour in dayHours">
+      <strong>{{hour}}</strong>
     </div>
   </div>
-  <div>
-    <div ng-repeat="day in analytics.weekhoursArr">
-      <span>{{$index}}</span>
-      <span
-        ng-repeat="hour in day"
-        ng-class="getContributionClass(getTotal(hour, events))"
-        tooltip-html-unsafe="{{getTooltip(hour, events)}}"
-      >
-        {{getTotal(hour, events)}}
-        <!-- {{getTotal(hour, events) / max}} -->
-      </span>
+
+  <div ng-repeat="day in analytics.weekhoursArr" class="flex-container">
+    <div class="flex-row">{{$index}}</div>
+    <div class="flex-row"
+      ng-repeat="hour in day"
+      ng-class="getContributionClass(getTotal(hour, events))"
+      tooltip-html-unsafe="{{getTooltip(hour, events)}}"
+    >
+      {{getTotal(hour, events)}}
+      <!-- {{getTotal(hour, events) / max}} -->
     </div>
   </div>
 </section>
