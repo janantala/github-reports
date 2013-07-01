@@ -59,6 +59,33 @@ angular.module('dashboardApp')
     }
   };
 
+  $scope.checkEvent = {
+    push: true,
+    pullrequest: true,
+    issues: true
+  };
+
+  $scope.changeEvents = function(){
+    console.log($scope.checkEvent);
+    var events = [];
+    if ($scope.checkEvent.push) {
+      events.push('PushEvent');
+    }
+    if ($scope.checkEvent.pullrequest) {
+      events.push('PullRequestEvent');
+    }
+    if ($scope.checkEvent.issues) {
+      events.push('IssuesEvent');
+    }
+
+    $scope.events = events;
+
+    $scope.maxYear = getMax($scope.analytics.yearArr, $scope.events);
+    $scope.maxWeek = getMax($scope.analytics.weekArr, $scope.events);
+    $scope.maxDay = getMax($scope.analytics.dayArr, $scope.events);
+    $scope.maxWeekHours = getMaxDouble($scope.analytics.weekhoursArr, $scope.events);
+  };
+
   for (var dh=0; dh<24;dh++){
     $scope.dayHours.push(dh);
   }
