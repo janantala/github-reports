@@ -62,27 +62,27 @@
   </ul>
 </section> -->
 
-<table class="">
+<section class="">
   <caption>weekhours</caption>
-  <thead>
-    <tr>
-      <th>Day</th>
-      <th ng-repeat="hour in dayHours">
+  <div>
+    <div>
+      <span>Day</span>
+      <span ng-repeat="hour in dayHours">
         {{hour}}
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="day in analytics.weekhoursArr">
-      <td>{{$index}}</td>
-      <td
+      </span>
+    </div>
+  </div>
+  <div>
+    <div ng-repeat="day in analytics.weekhoursArr">
+      <span>{{$index}}</span>
+      <span
         ng-repeat="hour in day"
         ng-class="getContributionClass(getTotal(hour, events))"
         tooltip-html-unsafe="{{getTooltip(hour, events)}}"
       >
         {{getTotal(hour, events)}}
         <!-- {{getTotal(hour, events) / max}} -->
-      </td>
-    </tr>
-  </tbody>
-</table>
+      </span>
+    </div>
+  </div>
+</section>
