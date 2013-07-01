@@ -58,7 +58,7 @@
     <div class="flex-row title">{{strings.DAY[$index]}}</div>
     <div class="flex-row"
       ng-repeat="hour in day"
-      ng-class="getContributionClass(getTotal(hour, events))"
+      ng-class="getContributionClass(getTotal(hour, events), maxWeekHours)"
       tooltip-html-unsafe="{{getTooltip(hour, events)}}"
     >
       {{getTotal(hour, events)}}

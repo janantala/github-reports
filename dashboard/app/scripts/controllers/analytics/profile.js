@@ -68,7 +68,17 @@ angular.module('dashboardApp')
     return sum;
   };
 
-  var getMax = function(week, events){
+  var getMax = function(arr, events){
+    var max = 0;
+    arr.forEach(function(item){
+      if (max < $scope.getTotal(item, events)){
+        max = $scope.getTotal(item, events);
+      }
+    });
+    return max;
+  };
+
+  var getMaxDouble = function(week, events){
     var max = 0;
     week.forEach(function(day){
       day.forEach(function(hour){
@@ -80,22 +90,25 @@ angular.module('dashboardApp')
     return max;
   };
 
-  $scope.max = getMax($scope.analytics.weekhoursArr, $scope.events);
+  $scope.maxYear = getMax($scope.analytics.yearArr, $scope.events);
+  $scope.maxWeek = getMax($scope.analytics.weekArr, $scope.events);
+  $scope.maxDay = getMax($scope.analytics.dayArr, $scope.events);
+  $scope.maxWeekHours = getMaxDouble($scope.analytics.weekhoursArr, $scope.events);
 
-  $scope.getContributionClass = function(contributions){
+  $scope.getContributionClass = function(contributions, max){
     if (contributions == 0) {
       return 'contributions-none';
     }
-    else if (contributions / $scope.max <= 0.25) {
+    else if (contributions / max <= 0.25) {
       return 'contributions-low';
     }
-    else if (contributions / $scope.max <= 0.50) {
+    else if (contributions / max <= 0.50) {
       return 'contributions-medium';
     }
-    else if (contributions / $scope.max <= 0.75) {
+    else if (contributions / max <= 0.75) {
       return 'contributions-high';
     }
-    else if (contributions / $scope.max <= 1.00) {
+    else if (contributions / max <= 1.00) {
       return 'contributions-most';
     }
   };
