@@ -43,14 +43,14 @@
 </section>
 
 
-<section class="weekhours">
+<!-- <section class="weekhours">
   <h4>WeekDays {{max}}</h4>
   <ul>
     <li ng-repeat="day in analytics.weekhoursArr">
       {{$index}}
       <ul>
         <li ng-repeat="hour in day">
-          {{$index}}: {{getTotal(hour, events)}}
+          {{$index}}: {{getTotal(hour, events)}} = {{getTotal(hour, events) / max}}
           <ul>
             <li ng-repeat="event in events">
               {{event}}: {{day[$parent.$index][event]}}
@@ -60,4 +60,25 @@
       </ul>
     </li>
   </ul>
-</section>
+</section> -->
+
+<table class="table table-condensed">
+  <caption>weekhours</caption>
+  <thead>
+    <tr>
+      <th>Day</th>
+      <th ng-repeat="hour in dayHours">
+        {{hour}}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="day in analytics.weekhoursArr">
+      <td>{{$index}}</td>
+      <td ng-repeat="hour in day" ng-class="getContributionClass(getTotal(hour, events))">
+        {{getTotal(hour, events)}}
+        <!-- {{getTotal(hour, events) / max}} -->
+      </td>
+    </tr>
+  </tbody>
+</table>

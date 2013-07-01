@@ -6,6 +6,11 @@ angular.module('dashboardApp')
   $scope.routeParams = $routeParams;
 
   $scope.events = ['PushEvent', 'PullRequestEvent', 'IssuesEvent'];
+  $scope.dayHours = [];
+
+  for (var h=0; h<24;h++){
+    $scope.dayHours.push(h);
+  }
 
   $scope.getTotal = function(item, events){
     var sum = 0;
@@ -28,4 +33,22 @@ angular.module('dashboardApp')
   };
 
   $scope.max = getMax($scope.analytics.weekhoursArr, $scope.events);
+
+  $scope.getContributionClass = function(contributions){
+    if (contributions == 0) {
+      return 'contributions-none';
+    }
+    else if (contributions / $scope.max <= 0.25) {
+      return 'contributions-low';
+    }
+    else if (contributions / $scope.max <= 0.50) {
+      return 'contributions-medium';
+    }
+    else if (contributions / $scope.max <= 0.75) {
+      return 'contributions-high';
+    }
+    else if (contributions / $scope.max <= 1.00) {
+      return 'contributions-most';
+    }
+  };
 }]);

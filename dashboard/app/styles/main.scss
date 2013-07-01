@@ -1,1 +1,30 @@
 @import "compass_twitter_bootstrap";
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+th, td {
+  border: 5px solid white;
+}
+.contributions-none {
+  background-color: rgb(240,240,240);
+}
+
+.contributions-low {
+  background-color: rgb(211,240,141);
+}
+
+.contributions-medium {
+  background-color: rgb(126,213,112);
+}
+
+.contributions-high {
+  background-color: rgb(0,182,75);
+}
+
+.contributions-most {
+  background-color: rgb(0,122,41);
+}
