@@ -10,11 +10,9 @@ var time = require('time')(Date);
 
 exports.analyze = function(req, res){
 
-  var file = 'janantala.csv';
-  // var file = 'btford.csv';
+  var file = req.query.csv || 'janantala.csv';
+  var timezone = req.query.timezone || 'Europe/Bratislava';
   var classes = ['PushEvent', 'PullRequestEvent', 'IssuesEvent'];
-  var timezone = 'Europe/Bratislava';
-  // var timezone = 'America/Detroit';
 
   Q.fcall(function(){
     var deferred = Q.defer();
