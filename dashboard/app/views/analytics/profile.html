@@ -28,7 +28,7 @@
     <div class="flex-row title text">
       Contributions
     </div>
-    <div class="flex-row"
+    <div class="flex-row contributions"
       ng-repeat="month in analytics.yearArr"
       ng-class="getContributionClass(getTotal(month, events), maxYear)"
       tooltip-html-unsafe="{{getTooltip(month, events)}}"
@@ -52,7 +52,7 @@
     <div class="flex-row title text">
       Contributions
     </div>
-    <div class="flex-row"
+    <div class="flex-row contributions"
       ng-repeat="day in analytics.weekArr"
       ng-class="getContributionClass(getTotal(day, events), maxWeek)"
       tooltip-html-unsafe="{{getTooltip(day, events)}}"
@@ -76,7 +76,7 @@
     <div class="flex-row title text">
       Contributions
     </div>
-    <div class="flex-row"
+    <div class="flex-row contributions"
       ng-repeat="hour in analytics.dayArr"
       ng-class="getContributionClass(getTotal(hour, events), maxDay)"
       tooltip-html-unsafe="{{getTooltip(hour, events)}}"
@@ -102,7 +102,7 @@
     <div class="flex-row title text">
       {{strings.DAY[$index]}}
     </div>
-    <div class="flex-row"
+    <div class="flex-row contributions"
       ng-repeat="hour in day"
       ng-class="getContributionClass(getTotal(hour, events), maxWeekHours)"
       tooltip-html-unsafe="{{getTooltip(hour, events)}}"

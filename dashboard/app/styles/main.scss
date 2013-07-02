@@ -62,6 +62,14 @@ html, body {
   width: 323px;
 }
 
+.contributions {
+  -webkit-transition: background-color 250ms linear;
+  -moz-transition: background-color 250ms linear;
+  -o-transition: background-color 250ms linear;
+  -ms-transition: background-color 250ms linear;
+  transition: background-color 250ms linear;
+}
+
 .contributions-none {
   background-color: rgb(240,240,240);
 }
