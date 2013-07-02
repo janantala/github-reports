@@ -16,7 +16,11 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 app.use(express.favicon());
 app.use(express.logger('dev'));
-app.use(express.bodyParser());
+app.use(express.bodyParser({
+  uploadDir: __dirname + '/uploads',
+  keepExtensions: true
+}));
+app.use(express.limit('1mb'));
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -47,8 +51,9 @@ app.all('/*', function(req, res, next) {
 
 app.get('/', routes.index);
 
+app.get('/analytics', analytics.analyze);
 app.get('/analytics/:user', analytics.analyze);
-app.post('/upload', uploads.csv);
+app.post('/report', uploads.csv);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
