@@ -1,9 +1,39 @@
 'use strict';
 
 angular.module('dashboardApp')
-.controller('AnalyticsProfileCtrl', ['$scope', 'analytics', '$routeParams', function ($scope, analytics, $routeParams) {
-  $scope.analytics = analytics;
-  $scope.routeParams = $routeParams;
+.controller('AnalyticsProfileCtrl', ['$scope', '$routeParams', 'Analytics', function ($scope, $routeParams, Analytics) {
+
+  var classes = ['PushEvent', 'PullRequestEvent', 'IssuesEvent'];
+  var initArray = function(arraySize, classes){
+    var array = [];
+    while(arraySize--) {
+      var obj = {};
+      classes.forEach(function(c){ obj[c] = 0; });
+      array.push(obj);
+    }
+    return array;
+  };
+
+  var yearArr = initArray(12, classes);
+  var weekArr = initArray(7, classes);
+  var dayArr = initArray(24, classes);
+  var weekhoursArr = [initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes)];
+
+  $scope.analytics = {
+    'yearArr': yearArr,
+    'weekArr': weekArr,
+    'dayArr': dayArr,
+    'weekhoursArr': weekhoursArr
+  };
+  $scope.report = window.report || { 'profile': '', 'file': '' };
+
+  Analytics.get({'profile': $scope.report.profile},
+  function(analytics){
+    console.log(analytics);
+    $scope.analytics = analytics;
+    $scope.changeEvents();
+  });
+
 
   $scope.events = ['PushEvent', 'PullRequestEvent', 'IssuesEvent'];
   $scope.dayHours = [];

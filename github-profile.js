@@ -51,6 +51,7 @@ app.all('/*', function(req, res, next) {
 
 app.get('/', routes.index);
 
+app.get('/analytics', analytics.analyze);
 app.get('/analytics/:user', analytics.analyze);
 app.post('/report', uploads.csv);
 
