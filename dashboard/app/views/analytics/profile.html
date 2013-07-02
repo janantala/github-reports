@@ -1,6 +1,7 @@
-<h2>Analytics {{routeParams.profile}}</h2>
+<h2 class="center">Analytics {{routeParams.profile}}</h2>
 
-<div class="btn-group">
+<section class="events">
+  <div class="btn-group">
     <button type="button" class="btn btn-success" ng-model="checkEvent.push" btn-checkbox ng-change="changeEvents()">
       PushEvent
     </button>
@@ -10,10 +11,11 @@
     <button type="button" class="btn btn-success" ng-model="checkEvent.issues" btn-checkbox ng-change="changeEvents()">
       IssuesEvent
     </button>
-</div>
+  </div>
+</section>
 
-<section class="year">
-  <h4>Year</h4>
+<section class="year chart">
+  <h4 class="center">Year</h4>
   <div class="flex-container">
     <div class="flex-row title text">
       Month
@@ -36,8 +38,8 @@
   </div>
 </section>
 
-<section class="week">
-<h4>Week</h4>
+<section class="week chart">
+<h4 class="center">Week</h4>
   <div class="flex-container">
     <div class="flex-row title text">
       Day
@@ -60,8 +62,8 @@
   </div>
 </section>
 
-<section class="day">
-  <h4>Day</h4>
+<section class="day chart">
+  <h4 class="center">Day</h4>
   <div class="flex-container">
     <div class="flex-row title text">
       Hour
@@ -85,8 +87,8 @@
 </section>
 
 
-<section class="weekhours">
-  <h4>WeekHours</h4>
+<section class="weekhours chart">
+  <h4 class="center">WeekHours</h4>
   <div class="flex-container">
     <div class="flex-row title text">
       Day / Hour
