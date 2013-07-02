@@ -155,10 +155,11 @@ angular.module('dashboardApp')
     }
   };
 
-  $scope.getTooltip = function(hour, events){
+  $scope.getTooltip = function(item, events){
     var html = '';
+    html += 'Contributions: ' + $scope.getTotal(item, events) + '<br />';
     events.forEach(function(event){
-      html += event + ': ' + hour[event] + '<br />';
+      html += event + ': ' + item[event] + '<br />';
     });
     return html;
   };

@@ -15,23 +15,23 @@
 <section class="year">
   <h4>Year</h4>
   <div class="flex-container">
-    <div class="flex-row title">
-      <strong>Month</strong>
+    <div class="flex-row title text">
+      Month
     </div>
-    <div class="flex-row" ng-repeat="month in months">
-      <strong>{{strings.SHORTMONTH[$index]}}</strong>
+    <div class="flex-row text" ng-repeat="month in months">
+      {{strings.SHORTMONTH[$index]}}
     </div>
   </div>
   <div class="flex-container">
-    <div class="flex-row title">
-      <strong>Contributions</strong>
+    <div class="flex-row title text">
+      Contributions
     </div>
     <div class="flex-row"
       ng-repeat="month in analytics.yearArr"
       ng-class="getContributionClass(getTotal(month, events), maxYear)"
       tooltip-html-unsafe="{{getTooltip(month, events)}}"
     >
-      {{getTotal(month, events)}}
+      <!-- {{getTotal(month, events)}} -->
     </div>
   </div>
 </section>
@@ -39,23 +39,23 @@
 <section class="week">
 <h4>Week</h4>
   <div class="flex-container">
-    <div class="flex-row title">
-      <strong>Day</strong>
+    <div class="flex-row title text">
+      Day
     </div>
-    <div class="flex-row" ng-repeat="day in days">
-      <strong>{{strings.SHORTDAY[$index]}}</strong>
+    <div class="flex-row text" ng-repeat="day in days">
+      {{strings.SHORTDAY[$index]}}
     </div>
   </div>
   <div class="flex-container">
-    <div class="flex-row title">
-      <strong>Contributions</strong>
+    <div class="flex-row title text">
+      Contributions
     </div>
     <div class="flex-row"
       ng-repeat="day in analytics.weekArr"
       ng-class="getContributionClass(getTotal(day, events), maxWeek)"
       tooltip-html-unsafe="{{getTooltip(day, events)}}"
     >
-      {{getTotal(day, events)}}
+      <!-- {{getTotal(day, events)}} -->
     </div>
   </div>
 </section>
@@ -63,23 +63,23 @@
 <section class="day">
   <h4>Day</h4>
   <div class="flex-container">
-    <div class="flex-row title">
-      <strong>Hour</strong>
+    <div class="flex-row title text">
+      Hour
     </div>
-    <div class="flex-row" ng-repeat="hour in hours">
-      <strong>{{hour}}</strong>
+    <div class="flex-row text" ng-repeat="hour in hours">
+      {{hour}}
     </div>
   </div>
   <div class="flex-container">
-    <div class="flex-row title">
-      <strong>Contributions</strong>
+    <div class="flex-row title text">
+      Contributions
     </div>
     <div class="flex-row"
       ng-repeat="hour in analytics.dayArr"
       ng-class="getContributionClass(getTotal(hour, events), maxDay)"
       tooltip-html-unsafe="{{getTooltip(hour, events)}}"
     >
-      {{getTotal(hour, events)}}
+      <!-- {{getTotal(hour, events)}} -->
     </div>
   </div>
 </section>
@@ -88,24 +88,24 @@
 <section class="weekhours">
   <h4>WeekHours</h4>
   <div class="flex-container">
-    <div class="flex-row title">
-      <strong>Day</strong>
+    <div class="flex-row title text">
+      Day / Hour
     </div>
-    <div class="flex-row" ng-repeat="hour in dayHours">
-      <strong>{{hour}}</strong>
+    <div class="flex-row text" ng-repeat="hour in dayHours">
+      {{hour}}
     </div>
   </div>
 
   <div ng-repeat="day in analytics.weekhoursArr" class="flex-container">
-    <div class="flex-row title">
-      <strong>{{strings.DAY[$index]}}</strong>
+    <div class="flex-row title text">
+      {{strings.DAY[$index]}}
     </div>
     <div class="flex-row"
       ng-repeat="hour in day"
       ng-class="getContributionClass(getTotal(hour, events), maxWeekHours)"
       tooltip-html-unsafe="{{getTooltip(hour, events)}}"
     >
-      {{getTotal(hour, events)}}
+      <!-- {{getTotal(hour, events)}} -->
     </div>
   </div>
 </section>
