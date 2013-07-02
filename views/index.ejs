@@ -18,6 +18,20 @@
   <body>
     
     <h1>GithubProfile</h1>
+    
+    <form action="/report" method="post" enctype="multipart/form-data">
+      <p>
+        Github profile:<br>
+        <input type="text" name="profile">
+      </p>
+      <p>
+        CSV:<br>
+        <input type="file" name="csv" accept=".csv">
+      </p>
+      <div>
+        <input type="submit" value="Send">
+      </div>
+    </form>
    
   </body>
 </html>
