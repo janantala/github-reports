@@ -25,9 +25,9 @@ angular.module('dashboardApp')
     'dayArr': dayArr,
     'weekhoursArr': weekhoursArr
   };
-  $scope.report = window.report || { 'profile': '', 'file': '' };
+  $scope.report = window.report || { 'profile': '', 'file': '', 'timezone': '' };
 
-  Analytics.get({'profile': $scope.report.profile},
+  Analytics.get({'csv': $scope.report.file, 'timezone': $scope.report.timezone},
   function(analytics){
     console.log(analytics);
     $scope.analytics = analytics;
