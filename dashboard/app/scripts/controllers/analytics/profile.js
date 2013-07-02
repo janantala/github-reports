@@ -66,7 +66,6 @@ angular.module('dashboardApp')
   };
 
   $scope.changeEvents = function(){
-    console.log($scope.checkEvent);
     var events = [];
     if ($scope.checkEvent.push) {
       events.push('PushEvent');
