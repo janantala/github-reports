@@ -1,5 +1,9 @@
 @import "compass_twitter_bootstrap";
 
+html, body {
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
+}
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -29,7 +33,7 @@
   -moz-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  width: 30px;
+  width: 25px;
   text-align: center;
   border: 2px solid white;
 }
@@ -38,6 +42,32 @@
   text-align: right;
   padding-right: 15px;
   width: 100px;
+}
+
+.flex-row.text {
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.center {
+  text-align: center;
+}
+
+.chart {
+  margin-bottom: 25px;
+}
+
+.events {
+  margin: 25px auto;
+  width: 323px;
+}
+
+.contributions {
+  -webkit-transition: background-color 250ms linear;
+  -moz-transition: background-color 250ms linear;
+  -o-transition: background-color 250ms linear;
+  -ms-transition: background-color 250ms linear;
+  transition: background-color 250ms linear;
 }
 
 .contributions-none {
