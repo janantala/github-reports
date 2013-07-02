@@ -2,7 +2,7 @@
 
 angular.module('dashboardApp')
 .factory('Analytics', ['$resource', function($resource) {
-  return $resource('http://localhost:port/analytics/:profile', { port: ':3000', profile: '@profile' }, {
+  return $resource('http://localhost:port/analytics', { port: ':3000', timezone: '@timezone', csv: '@csv' }, {
     'get'   : { method: 'GET', params: { } }
   });
 }]);
