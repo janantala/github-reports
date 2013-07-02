@@ -4,8 +4,16 @@
  */
 
 exports.csv = function(req, res){
-  res.send(200);
+  console.log(req.body);
+  console.log(req.files);
+
+  var paths = [];
+  var csv = req.files.csv;
+  console.log(csv);
+  var path = csv.path.split('/').pop();
+  res.render('report', {'profile': req.body.profile, 'file': path});
 };
+
 
 exports.clear = function(req, res){
 
