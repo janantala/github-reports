@@ -6,6 +6,7 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
+var ltld = require('./lib/tld');
 
 var app = express();
 
@@ -58,6 +59,7 @@ app.post('/report', uploads.csv);
 var server = http.createServer(app);
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + server.address().port);
+  ltld.updatePort("github", server.address().port);
 });
 
 /**
