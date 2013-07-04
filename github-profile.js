@@ -6,7 +6,7 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
-var ltld = require('./lib/local-tld');
+var ltld = require('local-tld-update');
 
 var app = express();
 
