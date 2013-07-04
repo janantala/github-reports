@@ -7,35 +7,55 @@
     <title>GithubProfile</title>
     <style>
 
-      * {
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
+      .form {
+        width: 500px;
+        margin: 50px auto;
       }
       
     </style>
+
+    <link rel="stylesheet" href="styles/main.css">
   </head>
   <body>
-    
-    <h1>GithubProfile</h1>
-    
-    <form action="/report" method="post" enctype="multipart/form-data">
-      <p>
-        Github profile:<br>
-        <input type="text" name="profile">
-      </p>
-      <p>
-        Timezone:<br>
-        <input type="text" name="timezone" value="Europe/Bratislava">
-      </p>
-      <p>
-        CSV:<br>
-        <input type="file" name="csv" accept=".csv">
-      </p>
-      <div>
-        <input type="submit" value="Send">
-      </div>
-    </form>
-   
+    <div class="container">
+      <a href="/">
+        <h1 class="center">GithubProfile reports</h1>
+      </a>
+      <section class="form">
+        <form action="/report" method="post" enctype="multipart/form-data" class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label" for="inputProfile">
+              Github profile:
+            </label>
+            <div class="controls">
+              <input class="input-medium" type="text" name="profile" placeholder="janantala" id="inputProfile">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputTimezone">
+              Timezone:
+            </label>
+            <div class="controls">
+              <input class="input-medium" type="text" name="timezone" value="Europe/Bratislava" placeholder="Europe/Bratislava" id="inputTimezone" required >
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputCSV">
+              CSV:
+            </label>
+            <div class="controls">
+              <input type="file" name="csv" accept=".csv" id="inputCSV" required >
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <button type="submit" class="btn btn-success">Show me reports!</button>
+            </div>
+          </div>
+        </form>
+
+      </section>
+
+    </div>
   </body>
 </html>
