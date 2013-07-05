@@ -8,11 +8,41 @@ var csv = require('csv');
 var Q = require('q');
 var time = require('time')(Date);
 
+var obj = {};
+var id;
+
 exports.analyze = function(req, res){
+
+  console.log('request');
+  if (!(req.headers.accept && req.headers.accept == 'text/event-stream')) {
+    res.send(404);
+    return false;
+  }
 
   var file = req.query.csv || 'janantala.csv';
   var timezone = req.query.timezone || 'Europe/Bratislava';
   var classes = ['PushEvent', 'PullRequestEvent', 'IssuesEvent'];
+
+  obj = {
+    'yearArr': initArray(12, classes), // histogram
+    'weekArr': initArray(7, classes), // histogram
+    'dayArr': initArray(24, classes), // histogram
+    'weekhoursArr': [initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes)] // punchcard
+  };
+
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive'
+  });
+
+  // res.socket.on('close', function () {
+  //   console.log('close');
+  //   if (interval) clearInterval(interval);
+  //   res.end();
+  // });
+  // 
+  id = (new Date()).toLocaleTimeString();
 
   Q.fcall(function(){
     var deferred = Q.defer();
@@ -29,10 +59,10 @@ exports.analyze = function(req, res){
     return filter(data, classes);
   })
   .then(function(data){
-    return classify(data, classes, timezone);
+    return classify(data, classes, timezone, res);
   })
-  .then(function(data){
-    res.send(data);
+  .then(function(){
+    constructSSE(res, id, JSON.stringify(obj), true);
   }, function (error) {
     res.error(error);
   });
@@ -61,15 +91,9 @@ var filter = function(data, classes){
   return filtered;
 };
 
-var classify = function(data, classes, timezone){
+var classify = function(data, classes, timezone, res){
 
-  var yearArr = initArray(12, classes); // histogram
-  var weekArr = initArray(7, classes); // histogram
-  var dayArr = initArray(24, classes); // histogram
-  var weekhoursArr = [initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes)]; // punchcard
-
-  data.forEach(function(contribution){
-    // console.log(contribution['created_at'], contribution['type']);
+  data.forEach(function(contribution, index){
 
     var arr = contribution['created_at'].split(' ');
     var year = arr[0].split('-')[0];
@@ -80,18 +104,15 @@ var classify = function(data, classes, timezone){
     var date = new time.Date(year, month, day, hour, 'UTC');
     date.setTimezone(timezone);
 
-    yearArr[date.getMonth()][contribution['type']] += 1;
-    weekArr[date.getDay()][contribution['type']] += 1;
-    dayArr[date.getHours()][contribution['type']] += 1;
-    weekhoursArr[date.getDay()][date.getHours()][contribution['type']] += 1;
-  });
+    obj.yearArr[date.getMonth()][contribution['type']] += 1;
+    obj.weekArr[date.getDay()][contribution['type']] += 1;
+    obj.dayArr[date.getHours()][contribution['type']] += 1;
+    obj.weekhoursArr[date.getDay()][date.getHours()][contribution['type']] += 1;
 
-  return {
-    'yearArr': yearArr,
-    'weekArr': weekArr,
-    'dayArr': dayArr,
-    'weekhoursArr': weekhoursArr
-  };
+    if (index % 200 === 0) {
+      constructSSE(res, id, JSON.stringify(obj), false);
+    }
+  });
 };
 
 var initArray = function(arraySize, classes){
@@ -104,3 +125,13 @@ var initArray = function(arraySize, classes){
   return array;
 };
 
+var constructSSE = function(res, id, data, close) {
+  res.write('id: ' + id + '\n');
+  res.write("data: " + data + '\n\n');
+  console.log('constructSSE: write');
+
+  if (close) {
+    console.log('constructSSE: res end');
+    res.end();
+  }
+};
