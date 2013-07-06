@@ -4,6 +4,10 @@
 
 <h2 class="center">{{report.profile}}</h2>
 
+<section ng-show="alert" class="alert-section">
+  <alert type="alert.type">{{alert.msg}}</alert>
+</section>
+
 <section class="events">
   <div class="btn-group">
     <button type="button" class="btn btn-success" ng-model="checkEvent.push" btn-checkbox ng-change="changeEvents()">
