@@ -27,13 +27,12 @@ angular.module('dashboardApp')
   };
   $scope.report = window.report || { 'profile': '', 'file': '', 'timezone': '' };
 
-  Analytics.get({'csv': $scope.report.file, 'timezone': $scope.report.timezone},
-  function(analytics){
+  Analytics.sse($scope.report.file, $scope.report.timezone, function(analytics){
     console.log(analytics);
     $scope.analytics = analytics;
     $scope.changeEvents();
+    $scope.$apply();
   });
-
 
   $scope.events = ['PushEvent', 'PullRequestEvent', 'IssuesEvent'];
   $scope.dayHours = [];
