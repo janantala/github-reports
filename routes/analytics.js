@@ -6,10 +6,10 @@
 var fs = require('fs');
 var csv = require('csv');
 var Q = require('q');
+var async = require('async');
 var time = require('time')(Date);
 
 var obj = {};
-var id;
 
 exports.analyze = function(req, res){
 
@@ -24,11 +24,18 @@ exports.analyze = function(req, res){
   var classes = ['PushEvent', 'PullRequestEvent', 'IssuesEvent'];
 
   obj = {
+    'close': false,
     'yearArr': initArray(12, classes), // histogram
     'weekArr': initArray(7, classes), // histogram
     'dayArr': initArray(24, classes), // histogram
     'weekhoursArr': [initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes)] // punchcard
   };
+
+  var id = (new Date()).toLocaleTimeString();
+  // var interval = setInterval(function() {
+  //   console.log('interval');
+  //   constructSSE(res, id, JSON.stringify(obj), false);
+  // }, 1000);
 
   res.writeHead(200, {
     'Content-Type': 'text/event-stream',
@@ -36,13 +43,11 @@ exports.analyze = function(req, res){
     'Connection': 'keep-alive'
   });
 
-  // res.socket.on('close', function () {
-  //   console.log('close');
-  //   if (interval) clearInterval(interval);
-  //   res.end();
-  // });
-  // 
-  id = (new Date()).toLocaleTimeString();
+
+  res.socket.on('close', function () {
+    console.log('close');
+    res.end();
+  });
 
   Q.fcall(function(){
     var deferred = Q.defer();
@@ -59,9 +64,10 @@ exports.analyze = function(req, res){
     return filter(data, classes);
   })
   .then(function(data){
-    return classify(data, classes, timezone, res);
+    return classify(data, classes, timezone);
   })
   .then(function(){
+    obj.close = true;
     constructSSE(res, id, JSON.stringify(obj), true);
   }, function (error) {
     res.error(error);
@@ -91,10 +97,9 @@ var filter = function(data, classes){
   return filtered;
 };
 
-var classify = function(data, classes, timezone, res){
+var classify = function(data, classes, timezone){
 
-  data.forEach(function(contribution, index){
-
+  data.forEach(function(contribution){
     var arr = contribution['created_at'].split(' ');
     var year = arr[0].split('-')[0];
     var month = arr[0].split('-')[1] - 1;
@@ -108,10 +113,6 @@ var classify = function(data, classes, timezone, res){
     obj.weekArr[date.getDay()][contribution['type']] += 1;
     obj.dayArr[date.getHours()][contribution['type']] += 1;
     obj.weekhoursArr[date.getDay()][date.getHours()][contribution['type']] += 1;
-
-    if (index % 200 === 0) {
-      constructSSE(res, id, JSON.stringify(obj), false);
-    }
   });
 };
 

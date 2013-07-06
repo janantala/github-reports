@@ -14,8 +14,7 @@ angular.module('dashboardApp')
       }, false);
 
       source.addEventListener('error', function(e) {
-       console.log('error');
-       source = undefined;
+       source.close();
       }, false);
     }
   };

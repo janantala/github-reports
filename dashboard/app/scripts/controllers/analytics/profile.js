@@ -31,6 +31,7 @@ angular.module('dashboardApp')
     console.log(analytics);
     $scope.analytics = analytics;
     $scope.changeEvents();
+    $scope.$apply();
   });
 
   $scope.events = ['PushEvent', 'PullRequestEvent', 'IssuesEvent'];
