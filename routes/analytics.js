@@ -24,7 +24,6 @@ exports.analyze = function(req, res){
   var classes = ['PushEvent', 'PullRequestEvent', 'IssuesEvent'];
 
   obj = {
-    'close': false,
     'yearArr': initArray(12, classes), // histogram
     'weekArr': initArray(7, classes), // histogram
     'dayArr': initArray(24, classes), // histogram
@@ -64,10 +63,11 @@ exports.analyze = function(req, res){
     return filter(data, classes);
   })
   .then(function(data){
-    return classify(data, classes, timezone);
+    return classify(data, classes, timezone, function(){
+      constructSSE(res, id, JSON.stringify(obj), false)
+    });
   })
   .then(function(){
-    obj.close = true;
     constructSSE(res, id, JSON.stringify(obj), true);
   }, function (error) {
     res.error(error);
@@ -97,9 +97,9 @@ var filter = function(data, classes){
   return filtered;
 };
 
-var classify = function(data, classes, timezone){
+var classify = function(data, classes, timezone, sendSSE){
 
-  data.forEach(function(contribution){
+  data.forEach(function(contribution, index){
     var arr = contribution['created_at'].split(' ');
     var year = arr[0].split('-')[0];
     var month = arr[0].split('-')[1] - 1;
@@ -113,6 +113,10 @@ var classify = function(data, classes, timezone){
     obj.weekArr[date.getDay()][contribution['type']] += 1;
     obj.dayArr[date.getHours()][contribution['type']] += 1;
     obj.weekhoursArr[date.getDay()][date.getHours()][contribution['type']] += 1;
+
+    if (index !== 0 && index % 100 === 0){
+      sendSSE();
+    }
   });
 };
 
@@ -128,10 +132,12 @@ var initArray = function(arraySize, classes){
 
 var constructSSE = function(res, id, data, close) {
   res.write('id: ' + id + '\n');
-  res.write("data: " + data + '\n\n');
+  res.write('data: ' + data + '\n\n');
   console.log('constructSSE: write');
 
   if (close) {
+    res.write('id: ' + id + '\n');
+    res.write('event: ' + 'close' + '\n\n');
     console.log('constructSSE: res end');
     res.end();
   }
