@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dashboardApp')
-.factory('Analytics', ['$resource', function() {
+.factory('Analytics', [function() {
 
   return {
     'sse': function(csv, timezone, ondata){
