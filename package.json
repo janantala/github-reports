@@ -12,6 +12,7 @@
     "time": "*",
     "cron": "*",
     "jsdom": "*",
-    "local-tld-update": "*"
+    "local-tld-update": "*",
+    "async": "*"
   }
 }
