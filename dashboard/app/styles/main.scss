@@ -10,6 +10,12 @@ html, body {
   box-sizing: border-box;
 }
 
+input.input-field {
+  height: 30px;
+  line-height: 20px;
+  text-align: left;
+}
+
 .flex-container {
   display: -webkit-flex;
   display: -moz-flex;
