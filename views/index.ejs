@@ -21,6 +21,38 @@
       <a href="/">
         <h1 class="center">GithubProfile reports</h1>
       </a>
+      
+      <section class="instructions">
+
+        <h3>Step 1</h3>
+        <ul>
+          <li>Go to <a href="https://code.google.com/apis/console/">Google APIs</a>.</li>
+          <li>Click <strong>"Create Project"</strong>, if asked. </li>
+          <li>Under <strong>"Services"</strong>, turn on <strong>BigQuery API</strong>.</li>
+        </ul>
+
+        <h3>Step 2</h3>
+        <ul>
+          <li>Go to <a href="https://bigquery.cloud.google.com/table/githubarchive:github.timeline">githubarchive:github.timeline table</a> at BigQuery and click <strong>"Query Table"</strong> in the top right corner.</li>
+          <li>Paste this query, change <strong>"USERNAME"</strong> to target GitHub username:
+
+          <code>
+              SELECT type, created_at FROM [githubarchive:github.timeline]
+              WHERE actor = "USERNAME"
+          </code>
+          </li>
+
+          <li>Hit <strong>"Run Query"</strong> and <strong>"Download as CSV"</strong>.</li>
+        </ul>
+
+        <h3>Step 3</h3>
+        <ul>
+          <li>Type GitHub username.</li>
+          <li>Select Timezone</li>
+          <li>Upload CSV file.</li>
+        </ul>
+      </section>
+
       <section class="form">
         <form action="/report" method="post" enctype="multipart/form-data" class="form-horizontal">
           <div class="control-group">
