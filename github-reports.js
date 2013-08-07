@@ -59,7 +59,7 @@ app.post('/report', uploads.csv);
 var server = http.createServer(app);
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + server.address().port);
-  ltld.update("github.profile", server.address().port);
+  ltld.update("github-reports", server.address().port);
 });
 
 /**
