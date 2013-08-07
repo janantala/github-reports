@@ -2,6 +2,8 @@
 
 Explore GitHub contributions
 
+<img src="https://raw.github.com/janantala/github-profile/develop/dashboard/app/images/contributions.png" />
+
 ## Instructions
 
 ### Step 1
