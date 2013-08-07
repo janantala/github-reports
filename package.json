@@ -1,8 +1,8 @@
 {
-  "name": "github-profile",
-  "version": "0.0.1",
+  "name": "github-reports",
+  "version": "0.1.0",
   "scripts": {
-    "start": "node github-profile.js"
+    "start": "node github-reports.js"
   },
   "dependencies": {
     "express": "3.2.6",
