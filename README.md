@@ -22,6 +22,7 @@ Explore GitHub contributions
 
 ### Step 3
 - Type GitHub username.
+- Select Timezone
 - Upload CSV file.
 
 ## License
