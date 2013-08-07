@@ -2,6 +2,10 @@
 
 Explore GitHub contributions
 
+Try it live [http://github-reports.janantala.com](http://github-reports.janantala.com)
+
+<img src="https://raw.github.com/janantala/github-profile/develop/dashboard/app/images/contributions.png" />
+
 ## Instructions
 
 ### Step 1
@@ -22,6 +26,7 @@ Explore GitHub contributions
 
 ### Step 3
 - Type GitHub username.
+- Select Timezone
 - Upload CSV file.
 
 ## License
