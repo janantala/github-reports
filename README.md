@@ -1,4 +1,4 @@
-#GithubProfile
+# GitHub Reports v0.1.0
 
 Explore GitHub contributions
 
