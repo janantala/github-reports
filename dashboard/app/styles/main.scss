@@ -10,6 +10,12 @@ html, body {
   box-sizing: border-box;
 }
 
+input.input-field {
+  height: 30px;
+  line-height: 20px;
+  text-align: left;
+}
+
 .flex-container {
   display: -webkit-flex;
   display: -moz-flex;
@@ -88,4 +94,15 @@ html, body {
 
 .contributions-most {
   background-color: rgb(0,122,41);
+}
+
+.alert-section {
+  width: 500px;
+  margin: 10px auto;
+  text-align: center;
+}
+
+.instructions {
+  margin: 20px auto;
+  max-width: 600px;
 }

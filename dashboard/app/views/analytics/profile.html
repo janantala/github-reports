@@ -2,7 +2,11 @@
   <h1 class="center">GithubProfile reports</h1>
 </a>
 
-<h2 class="center">{{report.profile}}</h2>
+<h3 class="center"><a ng-href="https://github.com/{{report.profile}}">{{report.profile}}</a></h3>
+
+<section ng-show="alert" class="alert-section">
+  <alert type="alert.type">{{alert.msg}}</alert>
+</section>
 
 <section class="events">
   <div class="btn-group">

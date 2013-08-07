@@ -19,6 +19,7 @@ angular.module('dashboardApp')
   var dayArr = initArray(24, classes);
   var weekhoursArr = [initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes), initArray(24, classes)];
 
+  $scope.alert = {msg: "Loading data..."};
   $scope.analytics = {
     'yearArr': yearArr,
     'weekArr': weekArr,
@@ -27,6 +28,10 @@ angular.module('dashboardApp')
   };
   $scope.report = window.report || { 'profile': '', 'file': '', 'timezone': '' };
 
+  Analytics.loaded(function(){
+    $scope.alert = null;
+    $scope.$apply();
+  });
   Analytics.sse($scope.report.file, $scope.report.timezone, function(analytics){
     console.log(analytics);
     $scope.analytics = analytics;

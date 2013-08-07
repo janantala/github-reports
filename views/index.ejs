@@ -21,6 +21,38 @@
       <a href="/">
         <h1 class="center">GithubProfile reports</h1>
       </a>
+      
+      <section class="instructions">
+
+        <h3>Step 1</h3>
+        <ul>
+          <li>Go to <a href="https://code.google.com/apis/console/">Google APIs</a>.</li>
+          <li>Click <strong>"Create Project"</strong>, if asked. </li>
+          <li>Under <strong>"Services"</strong>, turn on <strong>BigQuery API</strong>.</li>
+        </ul>
+
+        <h3>Step 2</h3>
+        <ul>
+          <li>Go to <a href="https://bigquery.cloud.google.com/table/githubarchive:github.timeline">githubarchive:github.timeline table</a> at BigQuery and click <strong>"Query Table"</strong> in the top right corner.</li>
+          <li>Paste this query, change <strong>"USERNAME"</strong> to target GitHub username:
+
+          <code>
+              SELECT type, created_at FROM [githubarchive:github.timeline]
+              WHERE actor = "USERNAME"
+          </code>
+          </li>
+
+          <li>Hit <strong>"Run Query"</strong> and <strong>"Download as CSV"</strong>.</li>
+        </ul>
+
+        <h3>Step 3</h3>
+        <ul>
+          <li>Type GitHub username.</li>
+          <li>Select Timezone</li>
+          <li>Upload CSV file.</li>
+        </ul>
+      </section>
+
       <section class="form">
         <form action="/report" method="post" enctype="multipart/form-data" class="form-horizontal">
           <div class="control-group">
@@ -28,7 +60,7 @@
               Github profile:
             </label>
             <div class="controls">
-              <input class="input-medium" type="text" name="profile" placeholder="janantala" id="inputProfile">
+              <input class="input-medium input-field" type="text" name="profile" placeholder="janantala" id="inputProfile">
             </div>
           </div>
           <div class="control-group">
@@ -36,7 +68,7 @@
               Timezone:
             </label>
             <div class="controls">
-              <input class="input-medium" type="text" name="timezone" value="Europe/Bratislava" placeholder="Europe/Bratislava" id="inputTimezone" required >
+              <input class="input-medium input-field" type="text" name="timezone" value="Europe/Bratislava" placeholder="Europe/Bratislava" id="inputTimezone" required >
             </div>
           </div>
           <div class="control-group">
@@ -44,7 +76,7 @@
               CSV:
             </label>
             <div class="controls">
-              <input type="file" name="csv" accept=".csv" id="inputCSV" required >
+              <input type="file" class="input-field" name="csv" accept=".csv" id="inputCSV" required >
             </div>
           </div>
           <div class="control-group">
@@ -55,6 +87,12 @@
         </form>
 
       </section>
+      
+      <footer class="instructions">
+        <p><small>The MIT License</small></p>
+        <p><small>Copyright (c) 2013 <a href="http://janantala.com">Jan Antala</a></small></p>
+        <p><small>Issues and code: <a href="https://github.com/janantala/github-profile">https://github.com/janantala/github-profile</a></small></p>
+      </footer>
 
     </div>
   </body>

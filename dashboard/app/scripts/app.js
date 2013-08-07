@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dashboardApp', ['ngResource', 'ui.bootstrap'])
+angular.module('dashboardApp', ['ui.bootstrap'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
